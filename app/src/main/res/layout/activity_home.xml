@@ -37,11 +37,11 @@
                     tools:ignore="MissingConstraints" />
 
                 <ImageView
-                    android:layout_width="287dp"
-                    android:layout_height="283dp"
-                    android:layout_marginTop="25dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="45dp"
                     android:layout_marginEnd="20dp"
-                    android:src="@drawable/img_car3"
+                    android:background="@drawable/img_car3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -295,7 +295,11 @@
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         android:background="@color/white"
+        android:paddingBottom="0dp"
         android:paddingStart="20dp"
+        app:itemPaddingTop="10dp"
+        app:itemIconTint="@drawable/color_state"
+        app:itemTextColor="@drawable/color_state"
         android:paddingEnd="20dp"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"

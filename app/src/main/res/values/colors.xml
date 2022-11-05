@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="hijau">#115E64</color>
+    <color name="nav_selected">#9EF1C7</color>
+    <color name="nav_unselected">#999999</color>
 </resources>
