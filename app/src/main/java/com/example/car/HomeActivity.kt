@@ -2,6 +2,7 @@ package com.example.car
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
@@ -12,10 +13,12 @@ class HomeActivity : AppCompatActivity() {
 
         init()
         navigationListener()
+        bottomNavBar()
     }
 
     private fun init() {
         navigation = findViewById(R.id.bt_nav_layout)
+
     }
 
     private fun navigationListener() {
@@ -37,4 +40,28 @@ class HomeActivity : AppCompatActivity() {
             false
         }
     }
+
+    @Suppress("DEPRECATION")
+    private fun bottomNavBar(){
+        val firstFragment=FirstFragment()
+        val secondFragment=SecondFragment()
+        val thirdFragment=ThirdFragment()
+        setCurrentFragment(firstFragment)
+
+        navigation.setOnNavigationItemSelectedListener{
+            when(it.itemId){
+                R.id.nav_home->setCurrentFragment(firstFragment)
+                R.id.nav_fav->setCurrentFragment(secondFragment)
+                R.id.nav_sel->setCurrentFragment(thirdFragment)
+
+            }
+            true
+        }
+    }
+
+    private fun setCurrentFragment(fragment: Fragment)=
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.flFragment,fragment)
+            commit()
+        }
 }
