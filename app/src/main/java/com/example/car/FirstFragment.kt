@@ -1,34 +1,24 @@
 package com.example.car
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.car.Datavalues.Companion.gambar
+import com.example.car.Datavalues.Companion.nama
+import com.example.car.databinding.ActivityMainBinding
 
 // TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class FirstFragment : Fragment(R.layout.fragment_first) {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SecondFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class FirstFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private lateinit var rvdata: RecyclerView
+    private var list = ArrayList<DataHome>()
+    private val layoutmanager = LinearLayoutManager(context)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,6 +27,43 @@ class FirstFragment : Fragment() {
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_first, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        rvdata = view.findViewById(R.id.rv_data)
+        rvdata.setHasFixedSize(true)
+        rvdata.layoutManager
+      // rvdata.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        list.addAll(listdata)
+        showRecyclerList()
+    }
+
+    val listdata: ArrayList<DataHome>
+        get() {
+            val dataJudul = nama
+            val dataPhoto = gambar
+            val listMovie = ArrayList<DataHome>()
+            for (i in dataJudul.indices) {
+                val data = DataHome(dataJudul[i], dataPhoto[i])
+                listMovie.add(data)
+            }
+            return listMovie
+        }
+
+    private fun showRecyclerList() {
+//        rvdata.layoutManager = layoutmanager
+        rvdata.layoutManager= LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        val listMovieAdapter = DataAdapter(list)
+        rvdata.adapter = listMovieAdapter
+//
+//        if(context?.applicationContext?.resources?.configuration?.orientation== Configuration.ORIENTATION_PORTRAIT){
+//            //rvdata.layoutManager= GridLayoutManager(context,3)
+//            rvdata.layoutManager= LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+//        }
+//        val listMovieAdapter = DataAdapter(list)
+//        rvdata.adapter = listMovieAdapter
     }
 
 }
